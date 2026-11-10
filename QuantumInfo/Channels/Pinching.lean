@@ -411,5 +411,5 @@ theorem pinching_pythagoras (ρ σ : MState d) :
     · exact dite_eq_right h_ker
     · convert (add_top _).symm
       apply dite_eq_right ?_
-      contrapose! h_ker
+      contrapose h_ker
       exact h_ker.trans (pinching_map_ker_le ρ σ)

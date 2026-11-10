@@ -904,7 +904,7 @@ lemma uPow_dvd {N M : ℕ} {A B : MvPolynomial (Fin 1 ⊕ Fin 3) ℝ}
   have hrelXX : IsRelPrime (X (Sum.inl 0) : MvPolynomial (Fin 1 ⊕ Fin 3) ℝ) (X (Sum.inr 2)) := by
     intro d hd1 hd2
     obtain ⟨c, hc⟩ := hd1
-    rcases (MvPolynomial.X_prime).irreducible.isUnit_or_isUnit hc with h | h
+    rcases (MvPolynomial.prime_X).irreducible.isUnit_or_isUnit hc with h | h
     · exact h
     · exfalso
       apply hnd

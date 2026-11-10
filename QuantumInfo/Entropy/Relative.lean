@@ -368,7 +368,7 @@ private lemma sandwiched_inner_eq_one (h : σ.M.ker ≤ ρ.M.ker) (t : ℝ) :
   · simp
   · have h_combine : (σ.M ^ (-2 * t)).mat * (σ.M ^ t).mat = (σ.M ^ (-t)).mat := by
       rw [show (-t : ℝ) = -2 * t + t by ring, HermitianMat.mat_rpow_add σ.nonneg]
-      contrapose! ht
+      contrapose ht
       linarith
     have h_support : (σ.M ^ t).mat * (σ.M ^ (-t)).mat = σ.M.supportProj.mat := by
       rw [← neg_ne_zero] at ht
@@ -1508,11 +1508,11 @@ private theorem sandwichedRelRentropy_additive_alpha_one (ρ₁ σ₁ : MState d
     tauto
   · simp only [SandwichedRelRentropy, zero_lt_one, ↓reduceDIte, ↓reduceIte, h1, h2,
       top_add, dite_eq_right_iff, ENNReal.coe_ne_top, imp_false]
-    contrapose! h1
+    contrapose h1
     exact (ker_le_of_ker_kron_le_left ρ₁ σ₁ ρ₂ σ₂) h1
   · simp only [SandwichedRelRentropy, zero_lt_one, ↓reduceDIte, ↓reduceIte, h1, h2,
       add_top, dite_eq_right_iff, ENNReal.coe_ne_top, imp_false]
-    contrapose! h1
+    contrapose h1
     exact (ker_le_of_ker_kron_le_left ρ₁ σ₁ ρ₂ σ₂) h1
 
 lemma sandwiched_term_product (ρ₁ σ₁ : MState d₁) (ρ₂ σ₂ : MState d₂) (α β : ℝ) :

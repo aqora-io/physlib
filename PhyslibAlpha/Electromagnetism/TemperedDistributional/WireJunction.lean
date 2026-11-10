@@ -155,7 +155,7 @@ lemma exists_integral_time_ne_zero {d} :
       b.zero_of_le_dist (by
         rw [Metric.mem_closedBall, not_le, dist_zero_right] at ht
         simpa [b, Prod.dist_eq] using ht.le)
-  refine Continuous.integral_pos_of_hasCompactSupport_nonneg_nonzero (x := 0)
+  refine Continuous.integral_pos_of_hasCompactSupport_nonneg_ne_zero (x := 0)
     (by fun_prop) hsupp (fun t => b.nonneg) (b.pos_of_mem_ball (by simp [b])).ne'
 
 end Space

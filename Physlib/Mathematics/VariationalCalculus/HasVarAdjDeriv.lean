@@ -633,7 +633,7 @@ protected lemma fderiv (u : X → U) (dx : X) (hu : ContDiff ℝ ∞ u)
       (fun (φ : X → U) x => fderiv ℝ φ x dx)
       (fun ψ x => - fderiv ℝ ψ x dx) u := by
   apply hasVarAdjDerivAt_of_hasVarAdjoint_of_linear
-  · intros; fun_prop [fderiv]
+  · intros; fun_prop
   · intro φ1 φ2 h1 h2
     funext x
     simp only [Pi.add_apply]

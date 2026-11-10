@@ -515,7 +515,7 @@ The functional calculus is continuous on matrices with spectrum in a compact set
 -/
 lemma continuousOn_cfc_of_compact {K : Set ℝ} {g : ℝ → ℝ} (hK : IsCompact K) (hg : ContinuousOn g K) :
     ContinuousOn (fun (A : HermitianMat d ℂ) ↦ A.cfc g) {A | spectrum ℝ A.mat ⊆ K} := by
-  by_contra! h_contra;
+  by_contra h_contra;
   -- By Stone-Weierstrass, there exists a sequence of polynomials `p_n` converging uniformly to `g` on `K`.
   obtain ⟨p_n, hp_n⟩ : ∃ p_n : ℕ → Polynomial ℝ, (∀ n, ∀ x ∈ K, |(p_n n).eval x - g x| ≤ 1 / (n + 1)) := by
     have h_stone_weierstrass : ∀ ε > 0, ∃ p : Polynomial ℝ, ∀ x ∈ K, |p.eval x - g x| < ε := by
@@ -1382,7 +1382,7 @@ lemma ker_cfc_le_ker_on_set
       -- Since $A.H.eigenvalues i \neq 0$, by hypothesis $h$, we have $f(A.H.eigenvalues i) \neq 0$.
       have h_f_nonzero : ∀ i, A.H.eigenvalues i ≠ 0 → f (A.H.eigenvalues i) ≠ 0 := by
         intro i hi; specialize h ( A.H.eigenvalues i ) ( hs <| by
-          exact Matrix.IsHermitian.eigenvalues_mem_spectrum_real (H A) i ) ; contrapose! hi; aesop;
+          exact Matrix.IsHermitian.eigenvalues_mem_spectrum_real (H A) i ) ; contrapose hi; aesop;
       generalize_proofs at *; (
       exact fun i hi => by simpa [ h_f_nonzero i hi ] using h_inner_zero_coeff i;) -- This line is just to prevent the proof from being completed prematurely. In a real proof, this line would be replaced with the actual proof steps.
     exact h_inner_zero_final;

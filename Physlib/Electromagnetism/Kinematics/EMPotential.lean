@@ -586,7 +586,9 @@ lemma deriv_equivariant {d} {x : SpaceTime d} (A : ElectromagneticPotential d)
     (Λ : LorentzGroup d)
     (hf : Differentiable ℝ A) : deriv (Λ • A) x = Λ • (deriv A (Λ⁻¹ • x)) := by
   rw [deriv_eq_tensorDeriv, deriv_eq_tensorDeriv, action_val, tensorDeriv_equivariant]
-  all_goals fun_prop
+  all_goals
+    try rw [action_val]
+    fun_prop
 
 /-!
 

@@ -106,11 +106,14 @@ layout: default
 unsafe def main (args  : List String) : IO UInt32 := do
   let _ ← noImports
   Lean.enableInitializersExecution
-  let statString ← CoreM.withImportModules #[`Physlib] (getStats).run'
-  println! statString
-  if "mkHTML" ∈ args then
-    let html ← CoreM.withImportModules #[`Physlib] (Stats.toHtml).run'
-    let htmlFile : System.FilePath := {toString := "./docs/Stats.html"}
-    IO.FS.writeFile htmlFile html
-    IO.println (s!"HTML file made.")
+  /- Import `Physlib` only once: importing it a second time in the same process segfaults
+    on Lean v4.36.0-rc2. -/
+  CoreM.withImportModules #[`Physlib] do
+    let statString ← (getStats).run'
+    println! statString
+    if "mkHTML" ∈ args then
+      let html ← (Stats.toHtml).run'
+      let htmlFile : System.FilePath := {toString := "./docs/Stats.html"}
+      IO.FS.writeFile htmlFile html
+      IO.println (s!"HTML file made.")
   pure 0
